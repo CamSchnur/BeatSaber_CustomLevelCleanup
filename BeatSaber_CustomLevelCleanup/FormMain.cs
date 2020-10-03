@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace BeatSaber_CustomLevelCleanup
 {
-    public partial class Form1 : Form
+    public partial class FormMain : Form
     {
         String defaultDataDirectory = System.IO.Path.GetFullPath(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "..", "LocalLow", "Hyperbolic Magnetism", "Beat Saber"));
         String defaultCustomLevelsDirectory = "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Beat Saber\\Beat Saber_Data\\CustomLevels\\";
 
-        public Form1()
+        public FormMain()
         {
             InitializeComponent();
             this.Load += Form1_Load;
