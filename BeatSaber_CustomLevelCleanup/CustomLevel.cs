@@ -12,8 +12,11 @@ namespace BeatSaber_CustomLevelCleanup
         public String SongHash { get; }
         public String Directory { get; }
 
-        public CustomLevel(String hash, String path)
+        public bool IsFavorite { get; set; }
+
+        public CustomLevel(String path, String hash)
         {
+            IsFavorite = false;
             SongHash = hash;
             Directory = path;
         }

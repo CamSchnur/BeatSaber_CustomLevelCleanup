@@ -49,6 +49,7 @@
     <Compile Include="CustomLevel.cs" />
     <Compile Include="CustomLevelCleaner.cs" />
     <Compile Include="Form1.cs">
+    <Compile Include="BeatSaberDataParser.cs" />
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
