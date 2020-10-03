@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualBasic.FileIO;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -54,13 +55,17 @@ namespace BeatSaber_CustomLevelCleanup
             if(res != System.Windows.Forms.DialogResult.OK)
             {
                 return;
-            }    
+            }
 
             //Once the user has confirmed, perform the deletes.
-            
-            
+            foreach (CustomLevel c in levelsToDelete)
+            {
+                FileSystem.DeleteDirectory(c.Directory, UIOption.AllDialogs, RecycleOption.SendToRecycleBin);
+            }
 
-
+            MessageBox.Show(levelsToDelete.Count.ToString() + " levels have been moved to the recycle bin.");
+            return;
+            
         }
 
         
