@@ -14,13 +14,24 @@ namespace BeatSaber_CustomLevelCleanup
     {
         public ConfirmationDialog()
         {
-            InitializeComponent();
         }
 
-        public ConfirmationDialog(List<CustomLevel> customLevelList)
+        public ConfirmationDialog(List<CustomLevel> customLevelsStarred, List<CustomLevel> customLevelsToDelete)
         {
+            InitializeComponent();
 
-
+            if (customLevelsToDelete != null && customLevelsStarred != null)
+            {
+                foreach (CustomLevel c in customLevelsStarred)
+                {
+                    listBoxFavLevels.Items.Add(c.TrimmedDirectory);
+                }
+                foreach (CustomLevel c in customLevelsToDelete)
+                {
+                    listBoxLevelsToDelete.Items.Add(c.TrimmedDirectory);
+                }
+            }
         }
+
     }
 }

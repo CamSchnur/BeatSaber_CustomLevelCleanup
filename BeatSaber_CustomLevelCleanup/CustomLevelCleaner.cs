@@ -33,8 +33,13 @@ namespace BeatSaber_CustomLevelCleanup
                             //this song appears in the favorites list.
                             c.IsFavorite = true;
                             break;
-                        }
+                        }                        
                     }
+                }
+                if(c.Directory.Contains("CustomWIPLevels"))
+                {
+                    //this is a custom in-progress level (presumably the user created it).  don't delete this one either.
+                    c.IsFavorite = true;
                 }
             }
 

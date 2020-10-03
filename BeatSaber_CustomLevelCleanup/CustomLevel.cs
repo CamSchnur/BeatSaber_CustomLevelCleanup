@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
@@ -12,6 +13,14 @@ namespace BeatSaber_CustomLevelCleanup
         public String SongHash { get; }
         public String Directory { get; }
 
+        public String TrimmedDirectory
+        {
+            get
+            {
+                return Path.GetFileName(this.Directory);
+            }
+        }
+
         public bool IsFavorite { get; set; }
 
         public CustomLevel(String path, String hash)
@@ -20,5 +29,6 @@ namespace BeatSaber_CustomLevelCleanup
             SongHash = hash;
             Directory = path;
         }
+
     }
 }
