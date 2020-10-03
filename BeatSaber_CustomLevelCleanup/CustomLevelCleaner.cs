@@ -13,20 +13,20 @@ namespace BeatSaber_CustomLevelCleanup
         public static void CleanupUnstarredLevels(String playerDataFile, String songHashFile, String customLevelsDirectory)
         {
             String playerData = File.ReadAllText(playerDataFile);
+            String songHashData = File.ReadAllText(songHashFile);
 
-            //First, find a list of favorite level IDs.
+            //First, find a list of custom level IDs.
             List <String> favorites = GetFavoriteLevelsFromPlayerDataFile(playerData);
 
-            //Next, Get a list of custom level locations.
-            
-            //Next, match up those IDs to actual directories
+            //Next, Get a list of custom level locations mapped to custom level IDs.
+            List<CustomLevel> customLevels = GetCustomLevelsFromSongHashFile(songHashData);
 
             //Next, delete every custom level directory not on the "favorites" list.
 
 
         }
 
-        public static List<String> GetFavoriteLevelsFromPlayerDataFile(String playerData)
+        private static List<String> GetFavoriteLevelsFromPlayerDataFile(String playerData)
         {
             //Need to parse PlayerData file. Start by finding the "Favorites" section.
             int favoritesStart = playerData.IndexOf("favoritesLevelIds");
@@ -42,6 +42,36 @@ namespace BeatSaber_CustomLevelCleanup
             List<String> favoriteLevels = commaSeparatedLevelIds.Split(',').ToList<String>();
 
             return favoriteLevels.Select(s => s.Trim('"')).ToList<String>();
+        }
+
+        private static List<CustomLevel> GetCustomLevelsFromSongHashFile(String songHashData)
+        {
+            List<CustomLevel> levels = new List<CustomLevel>();
+            //Our input file is of the format:
+            //{"c:\\somepath":{"directoryHash":1234,"songHash":"123ABC"},
+            //"c:\\somepath2":{"directoryHash":12345,"songHash":"123ABCD"}}
+
+            //Start by trimming the leading and trailing brackets, then split into strings representing each level.
+            //Also trim the *second* trailing bracket (for the last item in the list), as the trailing brackets for each other item will be removed as part of the Split.
+            String commaSeparatedLevels = songHashData.Substring(1, songHashData.Length - 3);
+            List<String> levelsToParse = commaSeparatedLevels.Split(new String[]{"},"}, StringSplitOptions.None).ToList<String>();
+
+            //Next, we will parse each level string into a CustomLevel object.
+            foreach(String s in levelsToParse)
+            {
+                //Format is:
+                //"C:\\somepath":{"directoryHash":1234,"songHash":"123ABC"
+                //(notice: trailing bracket has been removed by our splitting process.
+
+                int pathEnd = s.IndexOf(":{");
+                String songHashLocator = "\"songHash\":";
+                int hashStart = s.IndexOf(songHashLocator) + songHashLocator.Length;
+                String path = s.Substring(0, pathEnd).Trim('"');
+                String hash = s.Substring(hashStart, s.Length - hashStart).Trim('"');
+                levels.Add(new CustomLevel(path, hash));
+            }
+            return levels;
+
         }
     }
 }
