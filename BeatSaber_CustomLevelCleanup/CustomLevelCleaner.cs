@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
 namespace BeatSaber_CustomLevelCleanup
@@ -43,18 +44,18 @@ namespace BeatSaber_CustomLevelCleanup
                 }
             }
 
+            List<CustomLevel> levelsStarred = customLevels.Where(s => s.IsFavorite == true).ToList<CustomLevel>();
+            List<CustomLevel> levelsToDelete = customLevels.Where(s => s.IsFavorite == false).ToList<CustomLevel>();
 
             //Confirm the full selection with the user before taking any action
-            ConfirmationDialog d = new ConfirmationDialog(customLevels);
+            ConfirmationDialog d = new ConfirmationDialog(levelsStarred, levelsToDelete);
 
-            if(d.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            DialogResult res = d.ShowDialog();
+            if(res != System.Windows.Forms.DialogResult.OK)
             {
                 return;
             }    
 
-
-            
-            
             //Once the user has confirmed, perform the deletes.
             
             
