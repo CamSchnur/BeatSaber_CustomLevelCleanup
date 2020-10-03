@@ -59,6 +59,7 @@
             this.buttonChangePlayerData.TabIndex = 1;
             this.buttonChangePlayerData.Text = "Change";
             this.buttonChangePlayerData.UseVisualStyleBackColor = true;
+            this.buttonChangePlayerData.Click += new System.EventHandler(this.buttonChangePlayerData_Click);
             // 
             // buttonChangeSongHashData
             // 
@@ -68,6 +69,7 @@
             this.buttonChangeSongHashData.TabIndex = 2;
             this.buttonChangeSongHashData.Text = "Change";
             this.buttonChangeSongHashData.UseVisualStyleBackColor = true;
+            this.buttonChangeSongHashData.Click += new System.EventHandler(this.buttonChangeSongHashData_Click);
             // 
             // button3
             // 
@@ -77,7 +79,7 @@
             this.button3.TabIndex = 3;
             this.button3.Text = "Start";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // buttonChangeCustomLevels
             // 
@@ -87,6 +89,7 @@
             this.buttonChangeCustomLevels.TabIndex = 2;
             this.buttonChangeCustomLevels.Text = "Change";
             this.buttonChangeCustomLevels.UseVisualStyleBackColor = true;
+            this.buttonChangeCustomLevels.Click += new System.EventHandler(this.buttonChangeCustomLevels_Click);
             // 
             // textBoxCustomLevels
             // 
