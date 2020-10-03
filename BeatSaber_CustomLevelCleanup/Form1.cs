@@ -31,7 +31,7 @@ namespace BeatSaber_CustomLevelCleanup
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-
+            CustomLevelCleaner.CleanupUnstarredLevels(textBoxPlayerData.Text, textBoxSongHashData.Text, textBoxCustomLevels.Text);
         }
 
         #region Directory Change Related
